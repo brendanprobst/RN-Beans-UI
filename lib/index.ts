@@ -1,4 +1,3 @@
-import Text from "./FunctionalComponent/Text";
-import { Hello } from "./StateFulComponent/Hello";
-
-export { Text, Hello };
+import Components from "./components/index";
+import BeansProvider, { ThemeContext, useTheme } from "./styles/themeProvider";
+export { Components, ThemeContext, BeansProvider, useTheme };
