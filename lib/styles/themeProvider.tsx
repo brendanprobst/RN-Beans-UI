@@ -13,20 +13,25 @@ export function extendTheme(customTheme: BeansThemeType): BeansThemeType {
   if (customTheme === null || customTheme === undefined) {
     return defaultTheme;
   } else {
+    const mergeStaticColors = {
+      ...customTheme.Colors?.StaticColors,
+      ...defaultColors.StaticColors,
+    };
+    const mergedDarkColors = {
+      ...defaultColors.DarkModeColors,
+      ...customTheme.Colors?.DarkModeColors,
+    };
+    const mergedLightColors = {
+      ...defaultColors.LightModeColors,
+      ...customTheme.Colors?.LightModeColors,
+    };
+
     const newTheme: BeansThemeType = {
       Colors: {
-        // custom static colors
-        ...(customTheme.Colors?.StaticColors as any),
-        // default static colors
-        ...(defaultColors.StaticColors as any),
-        // dynamic default colors
+        ...(mergeStaticColors as any),
         ...(colorScheme === "dark"
-          ? defaultColors.DarkModeColors
-          : defaultColors.LightModeColors),
-        // dynamic custom colors
-        ...(colorScheme === "dark"
-          ? customTheme.Colors?.DarkModeColors
-          : customTheme.Colors?.LightModeColors),
+          ? (mergedDarkColors as any)
+          : (mergedLightColors as any)),
       },
       Fonts: {
         ...defaultFonts,
