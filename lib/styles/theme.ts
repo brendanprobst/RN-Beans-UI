@@ -26,7 +26,7 @@ export const defaultColors: ColorThemeType = {
     secondary: "#FFC0CB",
     blah: "#FF0000",
   },
-} as const;
+};
 export const defaultFonts: FontThemeType = {
   title: { fontFamily: "Exo_400Regular", fontSize: 28 },
   subtitle: {
@@ -44,73 +44,7 @@ export const defaultTheme: BeansThemeType = {
   Colors: { ...defaultColors },
   Fonts: { ...defaultFonts },
 };
-export const Colors = {
-  // primary: "#6840D9",
-  primaryLight: "#8F67FF",
-  primaryDark: "#3C0095",
-  // BLUE
-  accent1Light: "#8ED6FF",
-  accent1Dark: "#0085BE",
-  // PINK
-  accent2Light: "#FF61C0",
-  accent2Dark: "#BC0063",
-  //Others
-  urgent: "#ed7286",
 
-  yellow: "#ffc107",
-  white: "#fff",
-  black: "#000",
-};
-export const ColorsDark = {
-  ...Colors,
-  border: "#4f4f4f",
-  // primary: "#9875FA",
-  primary: "#9875FA",
-  primaryAccent: "#B5A0F2",
-  accent1: "#7BBCD1",
-  accent2: "#E4499E",
-  text: "#FCFCFC",
-  textSecondary: "#cccccc",
-  bg: "#222222",
-  fg: "#303030",
-  card: "#303030",
-  button: "#343434",
-  blur: "#222222",
-  danger: "#c94444",
-  success: "#549e60",
-  textLink: "#5d96f1",
-  accent1Button: "#569CC850",
-  accent1ButtonText: "#03A4E9",
-  accent2Button: "#D14A9430",
-  accent2ButtonText: "#e44ea0",
-  primaryButtonText: "#BB9AF1",
-  primaryButton: "#906CF430",
-};
-export const ColorsLight = {
-  ...Colors,
-  border: "#c4c4c4",
-
-  primary: "#8F67FF",
-  primaryAccent: "#613acf",
-  accent1: "#77C8E2",
-  accent2: "#E44EA0",
-  text: "#000000",
-  textSecondary: "#666666",
-  bg: "#FFFFFF",
-  fg: "#F0F0F0",
-  card: "#FFFFFF",
-  button: "#EEF2F6",
-  blur: "#333333",
-  danger: "#F66363",
-  success: "#5ac771",
-  textLink: "#0645ad",
-  accent1Button: "#77C8E250",
-  accent1ButtonText: "#0085BE",
-  accent2Button: "#D14A9430",
-  accent2ButtonText: "#BC0063",
-  primaryButton: "#8F67FF50",
-  primaryButtonText: "#3C009F",
-};
 export const Dim = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height,

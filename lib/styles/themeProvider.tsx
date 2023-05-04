@@ -14,8 +14,8 @@ export function extendTheme(customTheme: BeansThemeType): BeansThemeType {
     return defaultTheme;
   } else {
     const mergeStaticColors = {
-      ...customTheme.Colors?.StaticColors,
       ...defaultColors.StaticColors,
+      ...customTheme.Colors?.StaticColors,
     };
     const mergedDarkColors = {
       ...defaultColors.DarkModeColors,
