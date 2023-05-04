@@ -1,36 +1,34 @@
-import { Theme } from "lib/types";
+import { BeansThemeType } from "lib/types";
 import React, { createContext, useContext } from "react";
-import { defaultColors, defaultFontStyles, defaultTheme } from "./theme";
+import { defaultColors, defaultFonts, defaultTheme } from "./theme";
 import { useColorScheme } from "react-native";
 export type ExtendThemeProps = {
   Colors?: any;
   Fonts?: any;
 };
-export function extendTheme(
-  customTheme: Theme | { Colors: any; Fonts: any },
-): Theme {
+export function extendTheme(customTheme: BeansThemeType): BeansThemeType {
   const colorScheme = useColorScheme();
 
   console.log("in extend Theme");
   if (customTheme === null || customTheme === undefined) {
     return defaultTheme;
   } else {
-    const newTheme: Theme = {
+    const newTheme: BeansThemeType = {
       Colors: {
         // default and custom static colors
-        ...defaultColors.StaticColors,
-        ...customTheme.Colors.StaticColors,
+        ...(defaultColors.StaticColors as any),
+        ...(customTheme.Colors?.StaticColors as any),
         // dynamic default colors
         ...(colorScheme === "dark"
           ? defaultColors.DarkModeColors
           : defaultColors.LightModeColors),
         //dynamic custom colors
         ...(colorScheme === "dark"
-          ? customTheme.Colors.DarkModeColors
-          : customTheme.Colors.LightModeColors),
+          ? customTheme.Colors?.DarkModeColors
+          : customTheme.Colors?.LightModeColors),
       },
       Fonts: {
-        ...defaultFontStyles,
+        ...defaultFonts,
         ...customTheme.Fonts,
       },
     };
@@ -38,16 +36,21 @@ export function extendTheme(
   }
 }
 // 2. Create a ThemeContext
-export const ThemeContext = createContext<Theme>(defaultTheme);
+export const ThemeContext = createContext<BeansThemeType>(defaultTheme);
 
 // 3. Create a UIProvider component
 interface UIProviderProps {
   children: JSX.Element;
-  theme: Theme;
+  customTheme: BeansThemeType;
 }
-export default function BeansProvider({ theme, children }: UIProviderProps) {
+export default function BeansProvider({
+  customTheme,
+  children,
+}: UIProviderProps) {
+  const _theme = extendTheme(customTheme);
+  console.log({ _theme });
   return (
-    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={_theme}>{children}</ThemeContext.Provider>
   );
 }
 export const useTheme = () => useContext(ThemeContext);

@@ -1,41 +1,48 @@
-import { ColorTheme, FontTheme, Theme } from "lib/types";
+import { ColorThemeType, FontThemeType, BeansThemeType } from "lib/types";
 import { Dimensions, StyleSheet } from "react-native";
-
-export const defaultColors: ColorTheme = {
+// this file defines all the default values for the theme
+export const defaultColors: ColorThemeType = {
   StaticColors: {
-    primary: "#6840D9",
-    secondary: "#6840D9",
-    tertiary: "#6840D9",
+    black: "#000000",
+    white: "#FFFFFF",
+    gray: "#808080",
+    red: "#FF0000",
+    green: "#00FF00",
+    blue: "#0000FF",
+  },
+  DarkModeColors: {
+    background: "#1A1A1A",
+    text: "#FFFFFF",
+    accent: "#4A90E2",
+    primary: "#FFA500",
+    secondary: "#FFC0CB",
+    blah: "#0000FF",
+  },
+  LightModeColors: {
     background: "#FFFFFF",
-    foreground: "#FFFFFF",
     text: "#000000",
-    textSecondary: "#666666",
-    border: "#c4c4c4",
+    accent: "#0066CC",
+    primary: "#FFA500",
+    secondary: "#FFC0CB",
+    blah: "#FF0000",
   },
-  DarkModeColors: {},
-  LightModeColors: {},
 } as const;
-export const defaultFontStyles: FontTheme = {
+export const defaultFonts: FontThemeType = {
+  title: { fontFamily: "Exo_400Regular", fontSize: 28 },
+  subtitle: {
+    fontFamily: "Exo_400Regular",
+    fontSize: 22,
+  },
   body: {
+    fontFamily: "Poppins_400Regular",
     fontSize: 14,
-    fontFamily: "Roboto_400Regular",
+    bold: { fontFamily: "Poppins_600SemiBold", fontSize: 14 },
   },
-  title: {
-    fontSize: 24,
-    fontFamily: "OpenSans_500Medium",
-  },
-  subTitle: {
-    fontSize: 20,
-    fontFamily: "OpenSans_400Regular",
-  },
-  button: {
-    fontSize: 16,
-    fontFamily: "OpenSans_600SemiBold",
-  },
-} as const;
-export const defaultTheme: Theme = {
+  button: { fontFamily: "Exo_500Medium", fontSize: 16 },
+};
+export const defaultTheme: BeansThemeType = {
   Colors: { ...defaultColors },
-  Fonts: { ...defaultFontStyles },
+  Fonts: { ...defaultFonts },
 };
 export const Colors = {
   // primary: "#6840D9",
@@ -515,16 +522,16 @@ export const GlobalStyles = StyleSheet.create({
     width: 30,
     borderRadius: 15,
   },
-  quaeLogoSmall: {
+  logoSmall: {
     height: 30,
     width: 30,
   },
-  groupAvatarExtraSmall: {
+  avatarExtraSmall: {
     height: 20,
     width: 20,
     borderRadius: 10,
   },
-  groupAvatarLarge: {
+  avatarLarge: {
     height: 140,
     width: 140,
     borderRadius: 70,
