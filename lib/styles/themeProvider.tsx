@@ -15,14 +15,15 @@ export function extendTheme(customTheme: BeansThemeType): BeansThemeType {
   } else {
     const newTheme: BeansThemeType = {
       Colors: {
-        // default and custom static colors
-        ...(defaultColors.StaticColors as any),
+        // custom static colors
         ...(customTheme.Colors?.StaticColors as any),
+        // default static colors
+        ...(defaultColors.StaticColors as any),
         // dynamic default colors
         ...(colorScheme === "dark"
           ? defaultColors.DarkModeColors
           : defaultColors.LightModeColors),
-        //dynamic custom colors
+        // dynamic custom colors
         ...(colorScheme === "dark"
           ? customTheme.Colors?.DarkModeColors
           : customTheme.Colors?.LightModeColors),
@@ -32,6 +33,7 @@ export function extendTheme(customTheme: BeansThemeType): BeansThemeType {
         ...customTheme.Fonts,
       },
     };
+
     return newTheme;
   }
 }
@@ -48,7 +50,7 @@ export default function BeansProvider({
   children,
 }: UIProviderProps) {
   const _theme = extendTheme(customTheme);
-  console.log({ _theme });
+  console.log(_theme.Colors);
   return (
     <ThemeContext.Provider value={_theme}>{children}</ThemeContext.Provider>
   );
