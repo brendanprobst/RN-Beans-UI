@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
 import Text from "./text";
 import Container from "./container";
-import Icon from "./icons";
-import { Button, TouchableOpacity, View } from "react-native";
-import { ThemeContext } from "lib/styles/themeProvider";
-
+import { StyleProp, TouchableOpacity, View, ViewStyle } from "react-native";
+import { useTheme } from "../styles/themeProvider";
+import { MarginType, PaddingType } from "lib/types";
+import { handlePadding } from "./helpers";
 type ButtonProps = {
+  children: string;
   onPress?: () => void;
+  isLoading?: boolean;
+  loadingText?: string;
   disabled?: boolean;
   variant?: "contained" | "outlined" | "text" | "primary" | "link";
   color?: string;
@@ -17,27 +20,38 @@ type ButtonProps = {
   size?: "xs" | "sm" | "md" | "lg";
   isFullWidth?: boolean;
   isHalfWidth?: boolean;
-  minWidth?: boolean;
+  // minWidth?: boolean;
+  // maxWidth?: number | string;
   width?: number | string;
-  margin?: number;
+  flex?: number;
+  padding?: PaddingType;
+  margin?: MarginType;
+  style?: any;
 };
 export default function Button(props: ButtonProps) {
-  const { Colors } = useContext(ThemeContext);
-
-  // size / position / text
-  let width: null | number | string = null;
-  let minWidth: null | number = null;
-  let padding = 4;
-  let margin = 1;
-  let fontSize = 18;
-  let fontWeight = 500;
-
-  let fontFamily = "OpenSans_400Regular";
-  if (props.margin) {
-    margin = props.margin;
-  }
+  const { Colors } = useTheme();
+  // destructure props
+  const {
+    children = "",
+    onPress = () => {},
+    isLoading = false,
+    loadingText = "Loading...",
+    disabled = false,
+    variant = "contained",
+    size = "md",
+    isFullWidth = false,
+    isHalfWidth = false,
+    minWidth = false,
+    maxWidth = false,
+    padding = [0],
+    margin = [0],
+    ...otherProps
+  } = { ...props };
+  let paddingStyles: PaddingType = {};
+  let marginStyles: MarginType = {};
+  let fontSize = 0;
   if (props.size === "xs") {
-    padding = 4;
+    paddingStyles = handlePadding([4, 8]);
     fontSize = 12;
     minWidth = 50;
     fontFamily = "OpenSans_400Regular";
@@ -65,8 +79,8 @@ export default function Button(props: ButtonProps) {
     width = "48%";
   }
   if (props.minWidth) {
-    width = null;
-    minWidth = null;
+    width = undefined;
+    minWidth = undefined;
   }
   if (props.width) {
     width = props.width;
@@ -74,7 +88,6 @@ export default function Button(props: ButtonProps) {
 
   // border
   let borderWidth: number = 0;
-  let borderColor: null | string = null;
   let borderRadius: number = 5;
   // color
   let textColor = Colors.text;
@@ -112,25 +125,26 @@ export default function Button(props: ButtonProps) {
     textColor = Colors.link;
   } else if (props.color) {
     backgroundColor = props.color;
-    borderColor = Colors.borderColor;
-    textColor = Colors.textColor;
+    borderColor = Colors.border;
+    textColor = Colors.text;
   }
-
+  const touchableStyles: StyleProp<ViewStyle> = {
+    width: width,
+    alignSelf: "center",
+    padding: margin,
+    // paddingTop: props.marginT,
+    // paddingBottom: props.marginB,
+    // paddingLeft: props.marginL,
+    // paddingRight: props.marginR,
+    // paddingHorizontal: props.marginX,
+    // marginVertical: props.marginY,
+  };
   return (
     <TouchableOpacity
       onPress={props.onPress}
       disabled={props.disabled}
-      style={{
-        width: width,
-        alignSelf: "center",
-        padding: margin,
-        paddingTop: props.marginT,
-        paddingBottom: props.marginB,
-        paddingLeft: props.marginL,
-        paddingRight: props.marginR,
-        paddingHorizontal: props.marginX,
-        marginVertical: props.marginY,
-      }}
+      style={touchableStyles}
+      {...otherProps}
     >
       <Container
         alignCenter

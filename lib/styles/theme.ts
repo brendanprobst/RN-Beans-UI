@@ -1,5 +1,42 @@
+import { ColorTheme, FontTheme, Theme } from "lib/types";
 import { Dimensions, StyleSheet } from "react-native";
 
+export const defaultColors: ColorTheme = {
+  StaticColors: {
+    primary: "#6840D9",
+    secondary: "#6840D9",
+    tertiary: "#6840D9",
+    background: "#FFFFFF",
+    foreground: "#FFFFFF",
+    text: "#000000",
+    textSecondary: "#666666",
+    border: "#c4c4c4",
+  },
+  DarkModeColors: {},
+  LightModeColors: {},
+} as const;
+export const defaultFontStyles: FontTheme = {
+  body: {
+    fontSize: 14,
+    fontFamily: "Roboto_400Regular",
+  },
+  title: {
+    fontSize: 24,
+    fontFamily: "OpenSans_500Medium",
+  },
+  subTitle: {
+    fontSize: 20,
+    fontFamily: "OpenSans_400Regular",
+  },
+  button: {
+    fontSize: 16,
+    fontFamily: "OpenSans_600SemiBold",
+  },
+} as const;
+export const defaultTheme: Theme = {
+  Colors: { ...defaultColors },
+  Fonts: { ...defaultFontStyles },
+};
 export const Colors = {
   // primary: "#6840D9",
   primaryLight: "#8F67FF",
@@ -29,7 +66,6 @@ export const ColorsDark = {
   textSecondary: "#cccccc",
   bg: "#222222",
   fg: "#303030",
-  cardFg: "#222222",
   card: "#303030",
   button: "#343434",
   blur: "#222222",
@@ -55,7 +91,6 @@ export const ColorsLight = {
   textSecondary: "#666666",
   bg: "#FFFFFF",
   fg: "#F0F0F0",
-  cardFg: "#F0F0F0",
   card: "#FFFFFF",
   button: "#EEF2F6",
   blur: "#333333",
@@ -132,6 +167,7 @@ export const Font = {
     family: "OpenSans_500Medium",
   },
   buttonText: {
+    size: bodySize,
     family: "OpenSans_600SemiBold",
   },
   buttonTextLarge: {
@@ -183,6 +219,7 @@ export const Font = {
     family: "OpenSans_800ExtraBold_Italic",
   },
   serifTitle: {
+    size: 30,
     family: "SourceSerifPro_900Black",
   },
   serifHeader1: {
@@ -456,94 +493,6 @@ export const GlobalStyles = StyleSheet.create({
     borderWidth: 1,
   },
 
-  listButton: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignContent: "center",
-    borderRadius: 5,
-    padding: 10,
-    marginVertical: 1,
-  },
-  collapseHeaderContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  collapseBodyContainer: {
-    padding: 10,
-    borderBottomRightRadius: 5,
-    borderBottomLeftRadius: 5,
-  },
-  //Buttons
-  buttonGroup: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    paddingVertical: 5,
-  },
-  actionButton: {
-    padding: 10,
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderRadius: 100,
-    margin: 5,
-    zIndex: 1,
-    position: "relative",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4.5,
-    elevation: 1,
-  },
-  actionNumber: {
-    textAlign: "center",
-    position: "absolute",
-    zIndex: 2,
-    bottom: 0,
-    right: 0,
-    height: 20,
-    width: 20,
-    borderRadius: 10,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  // OPTIONS
-  electionResultContainer: {
-    borderWidth: 1,
-    borderRadius: 5,
-    marginVertical: 3,
-    minHeight: 40,
-    overflow: "hidden",
-    position: "relative",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  optionText: {
-    paddingLeft: 10,
-    paddingVertical: 5,
-    width: "85%",
-  },
-  electionOptionsContainer: {
-    height: "100%",
-    position: "absolute",
-    zIndex: -1,
-  },
-  electionValueContainer: {
-    width: "15%",
-  },
-  electionValue: {
-    textAlign: "right",
-    paddingRight: 5,
-  },
   selectedIcon: {
     position: "absolute",
     left: 0,
@@ -555,10 +504,7 @@ export const GlobalStyles = StyleSheet.create({
     width: 50,
     borderRadius: 25,
   },
-  quaeLogo: {
-    height: 50,
-    width: 50,
-  },
+
   groupAvatarMedium: {
     height: 80,
     width: 80,

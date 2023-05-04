@@ -1,61 +1,55 @@
-import React, { createContext, useState } from "react";
-
-// 1. Create a custom theme object
-interface Theme {
-  Colors: {
-    primary: string;
-    onPrimary: string;
-    secondary: string;
-    onSecondary: string;
-    background: string;
-    text: string;
-    border: string;
-    success: string;
-    link: string;
-    danger: string;
-  };
-  FontStyles: {
-    fontFamily: string;
-    fontSize: number;
-    fontWeight: string;
-  };
-}
-
-const customTheme: Theme = {
-  Colors: {
-    primary: "#007bff",
-    onPrimary: "#fff",
-    secondary: "#6c757d",
-    onSecondary: "#fff",
-    background: "#fff",
-    text: "#212529",
-    success: "#28a745",
-    link: "#007bff",
-    danger: "#dc3545",
-    border: "#e9ecef",
-  },
-  FontStyles: {
-    fontFamily: "Open Sans, sans-serif",
-    fontSize: 14,
-    fontWeight: "normal",
-  },
+import { Theme } from "lib/types";
+import React, { createContext, useContext } from "react";
+import { defaultColors, defaultFontStyles, defaultTheme } from "./theme";
+import { useColorScheme } from "react-native";
+export type ExtendThemeProps = {
+  Colors?: any;
+  Fonts?: any;
 };
+export function extendTheme(
+  customTheme: Theme | { Colors: any; Fonts: any },
+): Theme {
+  const colorScheme = useColorScheme();
+
+  console.log("in extend Theme");
+  if (customTheme === null || customTheme === undefined) {
+    return defaultTheme;
+  } else {
+    const newTheme: Theme = {
+      Colors: {
+        // default and custom static colors
+        ...defaultColors.StaticColors,
+        ...customTheme.Colors.StaticColors,
+        // dynamic default colors
+        ...(colorScheme === "dark"
+          ? defaultColors.DarkModeColors
+          : defaultColors.LightModeColors),
+        //dynamic custom colors
+        ...(colorScheme === "dark"
+          ? customTheme.Colors.DarkModeColors
+          : customTheme.Colors.LightModeColors),
+      },
+      Fonts: {
+        ...defaultFontStyles,
+        ...customTheme.Fonts,
+      },
+    };
+    return newTheme;
+  }
+}
+// 2. Create a ThemeContext
+export const ThemeContext = createContext<Theme>(defaultTheme);
+
+// 3. Create a UIProvider component
 interface UIProviderProps {
   children: JSX.Element;
   theme: Theme;
 }
-// 2. Create a ThemeContext
-export const ThemeContext = createContext<Theme>(customTheme);
-
-// 3. Create a UIProvider component
-export default function BeansProvider(props: UIProviderProps) {
-  const { theme, children } = { ...props };
-  const currentTheme = useState<typeof theme>(theme)[0];
+export default function BeansProvider({ theme, children }: UIProviderProps) {
   return (
-    <ThemeContext.Provider value={currentTheme}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
   );
 }
-
-export const useTheme = () => React.useContext(ThemeContext);
+export const useTheme = () => useContext(ThemeContext);
+export const useColors = () => useContext(ThemeContext).Colors;
+export const useFonts = () => useContext(ThemeContext).Fonts;

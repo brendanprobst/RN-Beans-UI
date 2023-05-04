@@ -1,8 +1,8 @@
 import React from "react";
-import { View } from "react-native";
+import { StyleProp, View, ViewStyle } from "react-native";
 
 export default function ScreenFooter({ children, type, noTabs, height }) {
-  const footerContainer = {
+  const footerContainer: StyleProp<ViewStyle> = {
     position: "absolute",
     bottom: noTabs ? 0 : 20,
     left: 10,
@@ -19,6 +19,7 @@ export default function ScreenFooter({ children, type, noTabs, height }) {
       alignContent: "center",
     };
   }
+
   return (
     <View style={footerContainer}>
       <View style={contentContainer}>{children}</View>

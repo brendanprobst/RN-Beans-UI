@@ -8,7 +8,7 @@ import {
   FontAwesome,
   FontAwesome5,
 } from "react-native-vector-icons";
-import { useTheme } from "../../providers/ThemeProvider";
+import { useTheme } from "../styles/themeProvider";
 /* 
 DOCUMENTATION
 Props: icon type: Material (default) | Ion | MaterialCommunity .... keep adding as you need
@@ -45,45 +45,15 @@ export default function Icon(props) {
   }
 
   if (props.secondary) {
-    color = Colors.textSecondary;
+    color = Colors.secondary;
   } else if (props.border) {
     color = Colors.border;
   } else if (props.primary) {
     color = Colors.primary;
-  } else if (props.primaryLight) {
-    color = Colors.primaryLight;
-  } else if (props.primaryDark) {
-    color = Colors.primaryDark;
-  } else if (props.accent1) {
-    color = Colors.accent1;
-  } else if (props.accent1Light) {
-    color = Colors.accent1Light;
-  } else if (props.accent1Dark) {
-    color = Colors.accent1Dark;
-  } else if (props.accent2) {
-    color = Colors.accent2;
-  } else if (props.accent2Light) {
-    color = Colors.accent2Light;
-  } else if (props.accent2Dark) {
-    color = Colors.accent2Dark;
   } else if (props.danger) {
     color = Colors.danger;
   } else if (props.success) {
     color = Colors.success;
-  } else if (props.yellow) {
-    color = Colors.yellow;
-  } else if (props.primaryButtonText) {
-    color = Colors.primaryButtonText;
-  } else if (props.accent1ButtonText) {
-    color = Colors.accent1ButtonText;
-  } else if (props.accent2ButtonText) {
-    color = Colors.accent2ButtonText;
-  }
-  if (props.white) {
-    color = Colors.white;
-  }
-  if (props.black) {
-    color = Colors.black;
   }
 
   const iconStyle = {

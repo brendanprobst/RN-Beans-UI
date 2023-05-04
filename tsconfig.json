@@ -26,7 +26,8 @@
     "esModuleInterop": true,
     "typeRoots": ["./node_modules/@types", "./@types"],
     "declaration": true /* Generates corresponding '.d.ts' file. */,
-    "sourceMap": true /* Generates corresponding '.map' file. */
+    "sourceMap": true /* Generates corresponding '.map' file. */,
+    "forceConsistentCasingInFileNames": true
   },
   "exclude": [
     "example",

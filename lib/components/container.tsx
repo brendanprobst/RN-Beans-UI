@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
-import { useTheme } from "../../providers/ThemeProvider";
-import { Dim } from "../../styles/styles";
+import { useTheme } from "../styles/themeProvider";
+import { Dim } from "../styles/theme";
 
 export default function Container(props) {
   const { Colors } = useTheme();
@@ -57,28 +57,22 @@ export default function Container(props) {
     justifyContent = "flex-start";
   } else if (props.justifyEvenly) {
     justifyContent = "space-evenly";
+  } else {
+    justifyContent = "flex-start";
   }
+
   if (props.bg) {
-    backgroundColor = Colors.bg;
+    backgroundColor = Colors.background;
   } else if (props.fg) {
-    backgroundColor = Colors.fg;
-  } else if (props.cardFg) {
-    backgroundColor = Colors.cardFg;
-  } else if (props.card) {
-    backgroundColor = Colors.card;
+    backgroundColor = Colors.foreground;
   } else if (props.primary) {
     backgroundColor = Colors.primary;
-  } else if (props.accent1) {
-    backgroundColor = Colors.accent1;
-  } else if (props.accent1Dark) {
-    backgroundColor = Colors.accent1Dark;
-  } else if (props.accent2) {
-    backgroundColor = Colors.accent2;
-  } else if (props.urgent) {
-    backgroundColor = Colors.urgent;
   } else if (props.border) {
     backgroundColor = Colors.border;
+  } else {
+    backgroundColor = "transparent";
   }
+
   if (props.onPress || props.onLongPress) {
     return (
       <TouchableOpacity

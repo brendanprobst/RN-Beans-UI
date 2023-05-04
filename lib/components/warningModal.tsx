@@ -10,3 +10,6 @@
 // 	);
 // }
 // TODO
+export default function WarningModal() {
+  return <></>;
+}

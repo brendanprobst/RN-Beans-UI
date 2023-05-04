@@ -5,11 +5,11 @@ import {
   View,
   Platform,
 } from "react-native";
-import { useTheme } from "../../providers/ThemeProvider";
-import { Font, Dim } from "../../styles/styles";
+import { useTheme } from "../styles/themeProvider";
+import { Font, Dim } from "../styles/theme";
 export default function TextInput(props) {
   const { Colors } = useTheme();
-  let width = undefined;
+  let width: number | string | undefined = undefined;
   const [focused, setFocused] = useState(false);
   let marginVertical = 10;
   if (props.sm) {
@@ -23,7 +23,7 @@ export default function TextInput(props) {
     width = "100%";
   }
   if (props.marginY) {
-    marginVertical = marginY;
+    marginVertical = props.marginY;
   }
   // useEffect(() => {
   // 	if (props.ref) {
@@ -41,7 +41,7 @@ export default function TextInput(props) {
         borderColor: !props.borderColor
           ? focused
             ? Colors.primary
-            : Colors.textSecondary + "70"
+            : Colors.secondary + "70"
           : props.borderColor,
         borderWidth: 1.125,
         borderRadius: 5,
@@ -70,7 +70,7 @@ export default function TextInput(props) {
           ...props.style,
         }}
         keyboardType={props.keyboardType || "default"}
-        placeholderTextColor={Colors.textSecondary}
+        placeholderTextColor={Colors.secondary}
         selectionColor={Colors.primary}
         onFocus={() => {
           setFocused(true);
