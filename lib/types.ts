@@ -35,7 +35,7 @@ type FontModifierMap = {
   };
 };
 
-type FontThemeType = {
+export type FontThemeType = {
   [key: string]:
     | {
         fontFamily: string;

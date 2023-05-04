@@ -3,6 +3,12 @@ import BeansProvider, {
   ThemeContext,
   useTheme,
 } from "./lib/styles/themeProvider";
+import {
+  BeansThemeType,
+  ColorThemeType,
+  FontThemeType,
+  Font,
+} from "./lib/types";
 import Text from "./lib/components/text";
 import Container from "./lib/components/container";
 import Icon from "./lib/components/icons";
@@ -28,3 +34,4 @@ export {
   useTheme,
   ScreenFooter,
 };
+export type { BeansThemeType, ColorThemeType, FontThemeType, Font };
