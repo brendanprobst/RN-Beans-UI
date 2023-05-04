@@ -2,6 +2,8 @@ import * as Components from "./lib/components/index";
 import BeansProvider, {
   ThemeContext,
   useTheme,
+  useColors,
+  useFonts,
 } from "./lib/styles/themeProvider";
 import {
   BeansThemeType,
@@ -32,6 +34,8 @@ export {
   ThemeContext,
   BeansProvider,
   useTheme,
+  useColors,
+  useFonts,
   ScreenFooter,
 };
 export type { BeansThemeType, ColorThemeType, FontThemeType, Font };
