@@ -7,7 +7,7 @@ export function extendTheme(
   customTheme: BeansThemeType,
   colorScheme: ColorSchemeName,
 ): BeansThemeType {
-  console.log("in extend Theme");
+  console.log("in extend Theme: ", colorScheme);
   if (customTheme === null || customTheme === undefined) {
     return defaultTheme;
   } else {
@@ -15,17 +15,17 @@ export function extendTheme(
       ...defaultColors.StaticColors,
       ...customTheme.Colors?.StaticColors,
     };
-    console.log("mergeStaticColors", mergeStaticColors);
+    // console.log("mergeStaticColors", mergeStaticColors);
     const mergedDarkColors = {
       ...defaultColors.DarkModeColors,
       ...customTheme.Colors?.DarkModeColors,
     };
-    console.log("mergedDarkColors", mergedDarkColors);
+    // console.log("mergedDarkColors", mergedDarkColors);
     const mergedLightColors = {
       ...defaultColors.LightModeColors,
       ...customTheme.Colors?.LightModeColors,
     };
-    console.log("mergedLightColors", mergedLightColors);
+    // console.log("mergedLightColors", mergedLightColors);
 
     const newTheme: BeansThemeType = {
       Colors: {
@@ -37,7 +37,7 @@ export function extendTheme(
         ...customTheme.Fonts,
       },
     };
-
+    console.log("newTheme", newTheme);
     return newTheme;
   }
 }
@@ -58,7 +58,7 @@ export default function BeansProvider({
   useEffect(() => {
     const newTheme = extendTheme(customTheme, colorScheme);
     setTheme(newTheme);
-  }, [colorScheme]);
+  }, [colorScheme, customTheme]);
 
   return (
     <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
