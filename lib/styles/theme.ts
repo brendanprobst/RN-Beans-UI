@@ -28,17 +28,14 @@ export const defaultColors: ColorThemeType = {
   },
 };
 export const defaultFonts: FontThemeType = {
-  title: { fontFamily: "Exo_400Regular", fontSize: 28 },
-  subtitle: {
-    fontFamily: "Exo_400Regular",
-    fontSize: 22,
-  },
+  title: { fontFamily: "Verdana", fontSize: 28 },
+  subtitle: { fontFamily: "Verdana", fontSize: 22 },
   body: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: "Helvetica",
     fontSize: 14,
-    bold: { fontFamily: "Poppins_600SemiBold", fontSize: 14 },
+    bold: { fontFamily: "Helvetica-Bold", fontSize: 14 },
   },
-  button: { fontFamily: "Exo_500Medium", fontSize: 16 },
+  button: { fontFamily: "Helvetica-SemiBold", fontSize: 16 },
 };
 export const defaultTheme: BeansThemeType = {
   Colors: { ...defaultColors },

@@ -3,12 +3,13 @@ import React, { createContext, useContext } from "react";
 import { defaultColors, defaultFonts, defaultTheme } from "./theme";
 import { useColorScheme } from "react-native";
 export type ExtendThemeProps = {
-  Colors?: any;
-  Fonts?: any;
+  customTheme?: BeansThemeType;
+  colorScheme?: "dark" | "light";
 };
-export function extendTheme(customTheme: BeansThemeType): BeansThemeType {
-  const colorScheme = useColorScheme();
-
+export function extendTheme({
+  customTheme,
+  colorScheme,
+}: ExtendThemeProps): BeansThemeType {
   console.log("in extend Theme");
   if (customTheme === null || customTheme === undefined) {
     return defaultTheme;
@@ -48,12 +49,14 @@ export const ThemeContext = createContext<BeansThemeType>(defaultTheme);
 interface UIProviderProps {
   children: JSX.Element;
   customTheme: BeansThemeType;
+  colorScheme: "dark" | "light";
 }
 export default function BeansProvider({
   customTheme,
   children,
+  colorScheme,
 }: UIProviderProps) {
-  const _theme = extendTheme(customTheme);
+  const _theme = extendTheme({ customTheme, colorScheme });
   return (
     <ThemeContext.Provider value={_theme}>{children}</ThemeContext.Provider>
   );
