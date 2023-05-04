@@ -21,6 +21,8 @@ import CheckBox from "./lib/components/checkBox";
 import Popover from "./lib/components/popover";
 import ModalWrapper from "./lib/components/modalWrapper";
 import ScreenFooter from "./lib/components/screenFooter";
+export type { BeansThemeType, ColorThemeType, FontThemeType, Font };
+
 export {
   Text,
   Container,
@@ -38,4 +40,3 @@ export {
   useFonts,
   ScreenFooter,
 };
-export type { BeansThemeType, ColorThemeType, FontThemeType, Font };
