@@ -1,10 +1,12 @@
 import { BeansThemeType } from "lib/types";
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { defaultColors, defaultFonts, defaultTheme } from "./theme";
-import { useColorScheme } from "react-native";
+import { ColorSchemeName, useColorScheme } from "react-native";
 
-export function extendTheme(customTheme: BeansThemeType): BeansThemeType {
-  const colorScheme = useColorScheme();
+export function extendTheme(
+  customTheme: BeansThemeType,
+  colorScheme: ColorSchemeName,
+): BeansThemeType {
   console.log("in extend Theme");
   if (customTheme === null || customTheme === undefined) {
     return defaultTheme;
@@ -51,9 +53,15 @@ export default function BeansProvider({
   customTheme,
   children,
 }: UIProviderProps) {
-  const _theme = extendTheme(customTheme);
+  const [theme, setTheme] = useState<BeansThemeType>(defaultTheme);
+  const colorScheme = useColorScheme();
+  useEffect(() => {
+    const newTheme = extendTheme(customTheme, colorScheme);
+    setTheme(newTheme);
+  }, [colorScheme]);
+
   return (
-    <ThemeContext.Provider value={_theme}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
   );
 }
 export const useTheme = () => useContext(ThemeContext);
