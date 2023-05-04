@@ -29,9 +29,7 @@ export function extendTheme(customTheme: BeansThemeType): BeansThemeType {
     const newTheme: BeansThemeType = {
       Colors: {
         ...(mergeStaticColors as any),
-        ...(colorScheme === "dark"
-          ? (mergedDarkColors as any)
-          : (mergedLightColors as any)),
+        ...(colorScheme === "dark" ? mergedDarkColors : mergedLightColors),
       },
       Fonts: {
         ...defaultFonts,
@@ -54,10 +52,10 @@ export default function BeansProvider({
   customTheme,
   children,
 }: UIProviderProps) {
-  const _theme = extendTheme(customTheme);
-  console.log(_theme.Colors);
   return (
-    <ThemeContext.Provider value={_theme}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={customTheme}>
+      {children}
+    </ThemeContext.Provider>
   );
 }
 export const useTheme = () => useContext(ThemeContext);

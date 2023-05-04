@@ -1,6 +1,7 @@
 import * as Components from "./lib/components/index";
 import BeansProvider, {
   ThemeContext,
+  extendTheme,
   useTheme,
   useColors,
   useFonts,
@@ -15,4 +16,12 @@ import Text from "./lib/components/text";
 
 export type { BeansThemeType, ColorThemeType, FontThemeType, Font };
 
-export { Text, ThemeContext, BeansProvider, useTheme, useColors, useFonts };
+export {
+  Text,
+  ThemeContext,
+  BeansProvider,
+  extendTheme,
+  useTheme,
+  useColors,
+  useFonts,
+};
